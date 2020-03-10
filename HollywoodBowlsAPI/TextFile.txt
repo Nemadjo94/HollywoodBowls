@@ -1,0 +1,15 @@
+﻿"EmailSettings": {
+    "MailServer": "smtp.gmail.com",
+    "MailPort": 587,
+    "SenderName": "Hollywood Bowls",
+    "Sender": "nemadjo94@gmail.com",
+    "Password": "zanwgsbyjhkyuyqb"
+  }
+
+  "EmailSettings": {
+    "MailServer": "smtp.gmail.com",
+    "MailPort": 587,
+    "SenderName": "Hollywood Bowls",
+    "Sender": "dnn.development.server@gmail.com",
+    "Password": "NemanjaDnnDevelopment994"
+  }

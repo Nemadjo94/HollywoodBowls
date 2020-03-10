@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg class="it-dotted-line" xmlns="http://www.w3.org/2000/svg" width="8" height="8">
+  <rect width="4" height="4" style="fill:#fff"></rect>
+  <rect x="4" width="4" height="4" style="fill:#111F3C"></rect>
+</svg>
