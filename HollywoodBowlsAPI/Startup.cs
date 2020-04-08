@@ -25,8 +25,8 @@ namespace HollywoodBowlsAPI
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddOptions();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-            services.AddTransient<IEmailService, EmailService>();
-            services.AddTransient<IEmailTemplateService, EmailTemplateService>();
+            services.AddSingleton<IEmailService, EmailService>();
+            services.AddSingleton<IEmailTemplateService, EmailTemplateService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -16,10 +16,8 @@ namespace HollywoodBowlsAPI.Services
             _emailSettings = emailSettings.Value;
         }
 
-        public Task<bool> SendMail(MailModel model)
+        public void SendMail(MailModel model)
         {
-            try
-            {
                 // Credentials
                 var credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password);
 
@@ -46,17 +44,7 @@ namespace HollywoodBowlsAPI.Services
                 };
 
                 // Send mail
-                client.Send(mail);
-
-                return Task.FromResult(true);
-            }
-            catch(Exception exc)
-            {
-                return Task.FromResult(false);
-                throw new InvalidOperationException(exc.Message);              
-            }
-
-           
+                client.Send(mail);    
         }
     }
 }

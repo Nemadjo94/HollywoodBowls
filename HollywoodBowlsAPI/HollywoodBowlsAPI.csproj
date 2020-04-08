@@ -13,7 +13,10 @@
     <None Update="MailTemplates\CustomerTemplate.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="MailTemplates\OwnerTemplate.html">
+    <None Update="MailTemplates\WasteOrderTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="MailTemplates\RestroomOrderTemplate.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

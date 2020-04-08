@@ -5,6 +5,6 @@ namespace HollywoodBowlsAPI.Services
 {
     public interface IEmailService
     {
-        Task<bool> SendMail(MailModel model);
+        void SendMail(MailModel model);
     }
 }

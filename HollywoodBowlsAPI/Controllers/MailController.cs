@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using HollywoodBowlsAPI.Entities;
 using HollywoodBowlsAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,39 +19,102 @@ namespace HollywoodBowlsAPI.Controllers
             _emailTemplateService = emailTemplateService;
         }
 
-        [HttpPost("sendmail")]
-        public async Task<IActionResult> SendMail([FromBody]FormModel model)
+        [HttpPost("restroomOrder")]
+        public async Task<IActionResult> PostRestroomOrder([FromBody]RestroomFormModel model)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest($"Model not valid: {ModelState}" );
+                return BadRequest($"Model not valid: {ModelState}");
             }
-
-            var sendToCustomer = new MailModel()
+            try
             {
-                Email = model.Email,
-                Subject = "Your Hollywood Bowls order",
-                HtmlTemplate = _emailTemplateService.PopulateCustomerTemplateBody(model.FirstName, model.LastName).ToString()
-            };
 
-            var sendToOwner = new MailModel()
-            {
-                Email = "dnn.development.server@gmail.com",
-                Subject = $"Order from {model.FirstName} {model.LastName}",
-                HtmlTemplate = _emailTemplateService.PopulateOwnerTemplateBody(model).ToString()
-            };
+                await Task.Run(() =>
+                {
+                    var customer = new Customer()
+                    {
+                        FirstName = model.FirstName,
+                        LastName = model.LastName
+                    };
+
+                    var sendToCustomer = new MailModel()
+                    {
+                        Email = model.Email,
+                        Subject = "Your Hollywood Bowls order",
+                        HtmlTemplate = _emailTemplateService.PopulateCustomerTemplate(customer)
+                    };
+
+                    var sendToOwner = new MailModel()
+                    {
+                        //Email = "dnn.development.server@gmail.com",
+                        Email = "nemadjo94@gmail.com",
+                        Subject = $"Order from {model.FirstName} {model.LastName}",
+                        HtmlTemplate = _emailTemplateService.PopulateRestroomOrderTemplate(model)
+                    };
 
 
-            var sentToCustomer = await _emailService.SendMail(sendToCustomer);
-            var sentToOwner = await _emailService.SendMail(sendToOwner);
+                    _emailService.SendMail(sendToCustomer);
+                    _emailService.SendMail(sendToOwner);
+                });
 
-            if (sentToCustomer && sentToOwner)
-            {
                 return Ok();
+
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(500, exc.Message);
             }
 
-            return StatusCode(500, "Mail could not be sent");
+
         }
 
-    }
+        [HttpPost("wasteOrder")]
+        public async Task<IActionResult> PostWasteOrder([FromBody]WasteFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest($"Model not valid: {ModelState}");
+            }
+            try
+            {
+
+                await Task.Run(() =>
+                {
+                    var customer = new Customer()
+                    {
+                        FirstName = model.FirstName,
+                        LastName = model.LastName
+                    };
+
+                    var sendToCustomer = new MailModel()
+                    {
+                        Email = model.Email,
+                        Subject = "Your Hollywood Bowls order",
+                        HtmlTemplate = _emailTemplateService.PopulateCustomerTemplate(customer)
+                    };
+
+                    var sendToOwner = new MailModel()
+                    {
+                        //Email = "dnn.development.server@gmail.com",
+                        Email = "nemadjo94@gmail.com",
+                        Subject = $"Order from {model.FirstName} {model.LastName}",
+                        HtmlTemplate = _emailTemplateService.PopulateWasteOrderTemplate(model)
+                    };
+
+
+                    _emailService.SendMail(sendToCustomer);
+                    _emailService.SendMail(sendToOwner);
+                });
+
+                return Ok();
+
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(500, exc.Message);
+            }
+        }
+
+    } 
+
 }
