@@ -16,7 +16,7 @@ namespace HollywoodBowlsAPI.Services
             _emailSettings = emailSettings.Value;
         }
 
-        public void SendMail(MailModel model)
+        public async Task SendMail(MailModel model)
         {
                 // Credentials
                 var credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password);
@@ -44,7 +44,7 @@ namespace HollywoodBowlsAPI.Services
                 };
 
                 // Send mail
-                client.Send(mail);    
+                await client.SendMailAsync(mail);    
         }
     }
 }

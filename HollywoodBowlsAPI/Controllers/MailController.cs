@@ -28,9 +28,6 @@ namespace HollywoodBowlsAPI.Controllers
             }
             try
             {
-
-                await Task.Run(() =>
-                {
                     var customer = new Customer()
                     {
                         FirstName = model.FirstName,
@@ -53,10 +50,9 @@ namespace HollywoodBowlsAPI.Controllers
                     };
 
 
-                    _emailService.SendMail(sendToCustomer);
-                    _emailService.SendMail(sendToOwner);
-                });
-
+                    await _emailService.SendMail(sendToCustomer);
+                    await _emailService.SendMail(sendToOwner);
+                
                 return Ok();
 
             }
@@ -77,9 +73,6 @@ namespace HollywoodBowlsAPI.Controllers
             }
             try
             {
-
-                await Task.Run(() =>
-                {
                     var customer = new Customer()
                     {
                         FirstName = model.FirstName,
@@ -102,9 +95,8 @@ namespace HollywoodBowlsAPI.Controllers
                     };
 
 
-                    _emailService.SendMail(sendToCustomer);
-                    _emailService.SendMail(sendToOwner);
-                });
+                    await _emailService.SendMail(sendToCustomer);
+                    await _emailService.SendMail(sendToOwner);
 
                 return Ok();
 
