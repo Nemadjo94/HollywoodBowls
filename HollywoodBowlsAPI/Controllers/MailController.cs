@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HollywoodBowlsAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [Controller]
     public class MailController : ControllerBase
     {
         private readonly IEmailService _emailService;
@@ -43,8 +43,7 @@ namespace HollywoodBowlsAPI.Controllers
 
                     var sendToOwner = new MailModel()
                     {
-                        //Email = "dnn.development.server@gmail.com",
-                        Email = "nemadjo94@gmail.com",
+                        Email = "dnn.development.server@gmail.com",
                         Subject = $"Order from {model.FirstName} {model.LastName}",
                         HtmlTemplate = _emailTemplateService.PopulateRestroomOrderTemplate(model)
                     };
@@ -88,8 +87,7 @@ namespace HollywoodBowlsAPI.Controllers
 
                     var sendToOwner = new MailModel()
                     {
-                        //Email = "dnn.development.server@gmail.com",
-                        Email = "nemadjo94@gmail.com",
+                        Email = "dnn.development.server@gmail.com",
                         Subject = $"Order from {model.FirstName} {model.LastName}",
                         HtmlTemplate = _emailTemplateService.PopulateWasteOrderTemplate(model)
                     };

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HollywoodBowlsAPI.Entities
 {
     public class WasteFormModel
     {
         [MaxLength(50)]
-        public string? Company { get; set; }
+        public string Company { get; set; } = null;
         [Required, MaxLength(50)]
         public string FirstName { get; set; }
         [Required, MaxLength(50)]
